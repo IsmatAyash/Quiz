@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Reset Questions {{data.name}}</h1>
+<div mat-dialog-content>
+  <h3>Warning!</h3>
+  <p style="color:red">Reseting will allow agent to retake same questions from the begining</p>
+  <p>Cannot reset unless all questions are asked!</p>
+  <mat-form-field>
+    <mat-label>Select Agent Name</mat-label>
+    <mat-select [(ngModel)]="selectedAgent">
+      <mat-option *ngFor="let agent of data" [value]="agent">
+        {{ agent }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="selectedAgent" cdkFocusInitial>Reset</button>
+</div>

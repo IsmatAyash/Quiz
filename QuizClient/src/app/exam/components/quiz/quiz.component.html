@@ -1,0 +1,35 @@
+<div *ngIf="CanTake | async">
+  <div
+    *ngIf="quizService.qns && quizService.qnNumber !== quizService.qns.length"
+  >
+    <progress-timer></progress-timer>
+    <quiz-question></quiz-question>
+    <div
+      class="options-area"
+      fxLayout="row"
+      fxLayoutAlign="start stretch"
+      fxLayoutFlex="1 1 0%"
+    >
+      <mat-radio-group
+        class="options-radio-group"
+        [(ngModel)]="quizService.qns[quizService.qnNumber].answer"
+      >
+        <ng-container
+          *ngFor="
+            let option of quizService.qns[quizService.qnNumber].Options;
+            let i = index
+          "
+        >
+          <mat-radio-button
+            class="options-radio-button"
+            [value]="i + 1"
+            (change)="Answer(i)"
+            *ngIf="option"
+          >
+            <span class="options-radio-button">{{ option }}</span>
+          </mat-radio-button>
+        </ng-container>
+      </mat-radio-group>
+    </div>
+  </div>
+</div>

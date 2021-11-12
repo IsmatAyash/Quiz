@@ -1,0 +1,30 @@
+fetch("http://rouwsrv:4000/api/Result", {
+  method: "POST",
+  body: JSON.stringify([
+                         {
+                            "QnID": "2",
+                            "QuizID": "8",
+                            "ParticipantID": "osmat",
+                            "AnsStatus": "Incorrect"
+                         },
+                         {
+                            "QnID": "15",
+                            "QuizID": "8",
+                            "ParticipantID": "osmat",
+                            "AnsStatus": "Correct"
+                         }
+                       ]),
+  headers: {"Content-type": "application/json"},
+  credentials: 'include' 
+}).then((response) => { response.text()}, (err) => { err.message });
+
+
+fetch('http://localhost:55928/api/Participant', { credentials: 'include' })
+  .then((response) => {
+    return response.json();
+  })
+  .then((myJson) => {
+    console.log(myJson);
+  });
+
+ 

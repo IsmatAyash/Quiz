@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+  <div fxFlex="70%">
+    <div fxLayout="row" fxLayoutGap="5px">
+      <span class="question-title">Question #: {{quizService.qnNumber+1}}</span>
+      <span class="fill-remaining-space"></span>
+      <button mat-flat-button color="warn" [disabled]="isPrev" (click)="goBack()">Back</button>
+      <button mat-flat-button color="warn" (click)="submitOrNext()">{{ nextButton }}</button>
+    </div>
+    <p class="mat-body-strong box">{{quizService.qns[quizService.qnNumber].Qn}}</p>
+  </div>
+  <div fxFlex="30%" fxLayoutAlign="center">
+    <img class="quiz-img-frame"
+         [src]="quizService.rootUrl+'/Images/'+quizService.qns[quizService.qnNumber].ImageName"
+         onerror="this.onerror=null;this.src='assets/img/emptyimage.png';">
+  </div>
+</div>

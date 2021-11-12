@@ -1,0 +1,46 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="form-box">
+    <mat-card-header>
+      <div class="col s6">
+        <img src="assets/img/quiz-image.png" style="width:200px;height:100px;" class="offset-s3">
+      </div>
+      <br>
+      <div class="col s6">
+        <mat-card-title>Product Knowledge</mat-card-title>
+      </div>
+    </mat-card-header>
+    <br>
+
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <mat-card-content>
+        <mat-form-field class="field-form">
+          <mat-icon matPrefix>account_circle</mat-icon>
+          <span matPrefix>  &nbsp;</span>
+          <input matInput name="ParticipantID"
+                 #ParticipantID [(ngModel)]="userService.userInfo.ParticipantID"
+                 placeholder="User Name" required>
+        </mat-form-field>
+
+        <mat-form-field class="field-form">
+          <mat-icon matPrefix>person</mat-icon>
+          <span matPrefix>  &nbsp;</span>
+          <input matInput type="text" name="FullName"
+                 #FullName [(ngModel)]="userService.userInfo.FullName"
+                 placeholder="Full Name" required>
+        </mat-form-field>
+
+        <mat-form-field class="field-form">
+          <mat-icon matPrefix>email</mat-icon>
+          <span matPrefix>  &nbsp;</span>
+          <input matInput style="text-align: left" type="email" name="Email"
+                 #Email [(ngModel)]="userService.userInfo.Email"
+                 placeholder="Email" required [pattern]="emailPattern">
+          <mat-error>Email should be entered correctly</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-raised-button color="warn" class="btn-block" (click)="onCancel()">Cancel</button>
+      <button mat-raised-button type="submit" color="primary" [disabled]="f.invalid" class="btn-block">Login</button>
+    </form>
+  </mat-card>
+
+</div>

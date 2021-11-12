@@ -1,0 +1,10 @@
+<div fxLayout="column">
+  <div fxLayout="row" class="content-container">
+    <span fxFlex="85%" class="content-span" >{{ data.message }}</span>
+    <mat-icon fxFlex="5%" id="close-icon" (click)="closeDialog()">close</mat-icon>
+  </div>
+  <div fxLayout="row">
+    <button mat-flat-button id="no-button" [mat-dialog-close]="false">No</button>
+    <button mat-flat-button id="yes-button" [mat-dialog-close]="true">Yes</button>
+  </div>
+</div>

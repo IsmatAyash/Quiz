@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutGap="5px">
+  <div class="timer" fxFlex="40%" fxLayoutAlign="center center">
+    <span >Count Down : {{quizService.displayCountDown()}}</span>
+  </div>
+  <div fxFlex="60%">
+    <section class="progressbar-section" >
+      <h2 class="progressbar-h4">Progress:</h2>
+      <mat-progress-bar
+          class="progressbar-margin"
+          color="accent"
+          mode="determinate"
+          [value]="(quizService.qnProgress)"
+          [bufferValue]="bufferValue">
+      </mat-progress-bar>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="3px">
+    <div class="box-size" fxLayout="column" fxFlex="20%" fxLayoutAlign="center center" >
+      <div *ngIf="quizGrade < 60"><img class="image-size" src="assets/img/bad.png"></div>
+      <div *ngIf="quizGrade > 60 && quizGrade <= 80"><img class="image-size" src="assets/img/goodjob.gif"></div>
+      <div *ngIf="quizGrade > 80"><img class="image-size" src="assets/img/verygood.png"></div>
+    </div>
+    <div class="box-size" fxLayout="column" fxFlex="20%" fxLayoutAlign="center center">
+      {{ userService.userInfo.FullName | titlecase }}
+    </div>
+    <div class="box-size" fxLayout="column" fxFlex="20%" fxLayoutAlign="center center">
+      <circle-progress *ngIf="quizGrade < 60" [percent]="quizGrade" [outerStrokeColor]="'#FF6347'" [innerStrokeColor]="'#32CD32'" [subtitleFormat]="formatSubtitle"></circle-progress>
+      <circle-progress *ngIf="quizGrade > 59" [percent]="quizGrade" [subtitleFormat]="formatSubtitle"></circle-progress>
+    </div>
+    <div class="box-size" fxLayout="column" fxFlex="20%" fxLayoutAlign="center center">
+      Quiz Completed in <br><br> Time Elapsed: {{quizService.displayTimeElapsed()}}
+    </div>
+  </div>
+  <ng-container *ngFor="let qn of quizService.qns;let i=index">
+    <div class="box">
+      <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="7px">
+        <div fxLayout="column" fxFlex="10%" class="in-correct-text">
+          Question #: {{ i + 1 }}
+        </div>
+        <div fxLayout="column" fxFlex="2%">
+          <mat-icon *ngIf="qn.answer == qn.correct" color="accent">thumb_up_alt</mat-icon>
+          <mat-icon *ngIf="qn.answer != qn.correct" color='warn'>thumb_down_alt</mat-icon>
+        </div>
+        <div class="mat-2" fxLayout="column" fxFlex="1 1 0%">
+          <div *ngIf="qn.answer == qn.correct" class="in-correct-text">Correct</div>
+          <div *ngIf="qn.answer != qn.correct" class="in-correct-text">Incorrect</div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="5px">
+          <div fxLayout="column" fxFlex="80%">
+            <p>{{ qn.Qn }}</p>
+          </div>
+          <div fxLayout="column" fxFlex="1 1 0%">
+            <img [src]="quizService.rootUrl+'/Images/'+qn.ImageName"
+                 onerror="this.onerror=null;this.src='assets/img/emptyimage.png';"
+                 class="main-img-size">
+          </div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="5px">
+          <div fxLayout="column" fxFlex="50%">
+            <p><b>The correct answer is: </b><br>{{ qn.Options[qn.correct - 1] }}</p>
+          </div>
+          <div fxLayout="column" fxFlex="50%" >
+            <p><b>Further Explanation: </b><br>{{ qn.AnswerDescription }}</p>
+          </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

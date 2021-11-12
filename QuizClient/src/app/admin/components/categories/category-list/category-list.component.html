@@ -1,0 +1,45 @@
+<div class="search-div">
+  <button mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon>Create
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+  <mat-table #catTable [dataSource]="datasource" matSort>
+    <ng-container matColumnDef="CategoryID">
+      <mat-header-cell fxFlex="5" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+      <mat-cell fxFlex="5" *matCellDef="let ele">{{ ele.CategoryID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CategoryName">
+      <mat-header-cell fxFlex="30" *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+      <mat-cell fxFlex="30" *matCellDef="let ele">{{ ele.CategoryName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions" class="container-border">
+      <mat-header-cell fxFlex="7" *matHeaderCellDef></mat-header-cell>
+      <mat-cell fxFlex="7" *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="onEdit(row)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="onDelete(row.CategoryID)"><mat-icon>delete</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No Data...
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':datasource != null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(datasource != null && datasource.data.length == 0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 9, 25, 100]" [pageSize]="9" showFirstLastButtons></mat-paginator>
+</div>

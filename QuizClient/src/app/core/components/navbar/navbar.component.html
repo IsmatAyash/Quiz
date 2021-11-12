@@ -1,0 +1,73 @@
+<mat-toolbar [color]="navbarBackgroundColor">
+  <mat-toolbar-row>
+    <img src="assets/img/logo-white.png" style="padding-top:10px;margin-left:0px;width:110px;height:40px;">
+    <span class="fill-remaining-space"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+      <div *ngIf="isLogged; else elseBlock">
+        <ng-container *ngIf="!isAgent">
+          <button mat-button routerLink="/participants" routerLinkActive="active" *ngIf="isAdmin">
+            <mat-icon>people</mat-icon>
+            <span class="mat-h3">Participant</span>
+          </button>
+
+          <button mat-button [matMenuTriggerFor]="qnMenu" >
+            <mat-icon>question_answer</mat-icon>
+            <span class="mat-h3">Questions</span>
+          </button>
+          <mat-menu #qnMenu="matMenu">
+            <button mat-menu-item routerLink="/questions" routerLinkActive="active">
+              <mat-icon>help_outline</mat-icon>
+              <span class="mat-h4">Question List</span>
+            </button>
+            <button mat-menu-item routerLink="/categories" routerLinkActive="active">
+              <mat-icon>category</mat-icon>
+              <span class="mat-h4">Categories</span>
+            </button>
+            <button mat-menu-item routerLink="/scores" routerLinkActive="active">
+              <mat-icon>score</mat-icon>
+              <span class="mat-h4">Participants Scores</span>
+            </button>
+          </mat-menu>
+
+        </ng-container>
+
+        <button mat-button [matMenuTriggerFor]="userMenu">
+          <mat-icon>person</mat-icon>
+          <span class="mat-h3">{{ fullName }}</span>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item routerLink="/quiz" routerLinkActive="active">
+            <mat-icon>launch</mat-icon>
+            <span class="mat-h4">Take a Quiz</span>
+          </button>
+          <button mat-menu-item routerLink="/grades" routerLinkActive="active">
+            <mat-icon>view_list</mat-icon>
+            <span class="mat-h4">View my Grades</span>
+          </button>
+        </mat-menu>
+
+        <mat-menu #moreMenu="matMenu">
+          <button mat-menu-item routerLink="/setting" routerLinkActive="active">
+            <mat-icon>settings</mat-icon>
+            <span class="mat-h4">Settings</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>help_outline</mat-icon>
+            <span class="mat-h4">Help</span>
+          </button>
+        </mat-menu>
+
+        <button mat-icon-button [matMenuTriggerFor]="moreMenu" *ngIf="isAdmin">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+      <ng-template #elseBlock>
+        <a routerLink="/login" mat-button>
+          <mat-icon>person_outline</mat-icon>
+          login
+        </a>
+      </ng-template>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

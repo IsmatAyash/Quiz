@@ -1,0 +1,5 @@
+ng build --base-href "/Quiz/" --prod
+Copy the content of the "dist" folder to the server under "D:\wwwroot\Quiz"
+Cut the web.config from D:\wwwroot\Quiz\assets and replace the one under Quiz sub-folder
+Give permission to "IIS APPPOOL\PK_Quiz" in SQL server (User Mapping --> "QuizDB") under security logins
+Make sure to share the "assets\img" folder to "Everyone" read access

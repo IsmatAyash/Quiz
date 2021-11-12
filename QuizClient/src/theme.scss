@@ -1,0 +1,73 @@
+@import "~@angular/material/_theming";
+
+@include mat-core();
+
+// define a custom theme
+// custom background and foreground palettes
+$app-primary: mat-palette($mat-teal, 500);
+$app-accent: mat-palette($mat-orange, 500);
+$app-warn: mat-palette($mat-red, 500);
+
+$quiz-dark-theme-background: (
+  app-bar:         map_get($mat-grey, 250),
+  background:      map-get($mat-grey, 700),
+  hover:           rgba(white, 0.04),
+  card:            map_get($mat-grey, 200),
+  dialog:          map_get($mat-grey, 200),
+  disabled-button: map-get($mat-teal, 100),
+  raised-button:   map-get($mat-orange, 500),
+  focused-button:  $white-6-opacity,
+  selected-button: map_get($mat-grey, 900),
+  disabled-list-option: black,
+  selected-disabled-button: map_get($mat-grey, 800),
+);
+
+$quiz-dark-theme-foreground: (
+  base:              map-get($mat-teal, 800),
+  disabled:          rgba(white, 0.3),
+  disabled-button:   rgba(rgb(82, 80, 80), 0.3),
+  disabled-text:     rgba(rgb(148, 146, 146), 0.3),
+  hint-text:         rgba(rgb(1, 48, 54), 0.3),
+  secondary-text:    rgba(rgb(29, 28, 28),0.9),
+  icon:              map-get($mat-teal, 800),
+  icons:             rgb(209, 202, 202),
+  text:              rgb(19, 18, 18)
+);
+
+// instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
+@function create-wonky-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $quiz-dark-theme-foreground,
+    background: $quiz-dark-theme-background,
+  );
+}
+
+
+$app-theme: create-wonky-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);
+
+// define a custom typography
+// headline = class="mat-h1"
+// title = class="mat-h2"
+// subheading-2 = class="mat-h3"
+// subheading-1 = class="mat-h4"
+// body-1 = class="mat-body"
+// body-2 = class="mat-body-strong"
+$app-typography: mat-typography-config(
+  $font-family: '"Open Sans", "Helvetica Neue", sans-serif',
+  $headline:      mat-typography-level(30px, 32px, 700),
+  $title:         mat-typography-level(20px, 32px, 700),
+  $subheading-2:  mat-typography-level(16px, 28px, 700),
+  $subheading-1:  mat-typography-level(14px, 24px, 600),
+  $body-2:        mat-typography-level(14px, 24px, 700),
+  $body-1:        mat-typography-level(14px, 20px, 400),
+  $button:        mat-typography-level(13px, 14px, 600),
+  $input:         mat-typography-level(inherit, 1.125, 400)
+);
+
+@include angular-material-typography($app-typography);

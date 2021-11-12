@@ -1,0 +1,170 @@
+<mat-toolbar>
+  <span>{{
+    qs.form.controls["QnID"].value
+      ? "Modify Question # " + qs.form.controls["QnID"].value
+      : "New Question"
+  }}</span>
+  <span class="fill-remaining-space"></span>
+  <button
+    class="btn-dialog-close"
+    mat-strocked-button
+    (click)="onClose(null)"
+    tabIndex="-1"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="qs.form" class="normal-form" (ngSubmit)="onSubmit()">
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+    <div fxFlex="60%" class="controlls-container">
+      <input type="hidden" formControlName="QnID" />
+      <mat-form-field appearance="fill">
+        <textarea
+          class="qn-textarea"
+          formControlName="Qn"
+          matInput
+          placeholder="Question*"
+        ></textarea>
+        <mat-error>{{ mandatoryMsg }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          formControlName="Option1"
+          matInput
+          placeholder="Option1*"
+        ></textarea>
+        <mat-error>{{ mandatoryMsg }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          formControlName="Option2"
+          matInput
+          placeholder="Option2*"
+        ></textarea>
+        <mat-error>{{ mandatoryMsg }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          formControlName="Option3"
+          matInput
+          placeholder="Option3"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          formControlName="Option4"
+          matInput
+          placeholder="Option4"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          formControlName="Option5"
+          matInput
+          placeholder="Option5"
+        ></textarea>
+      </mat-form-field>
+      <div class="button-row">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="qs.form.invalid"
+          type="submit"
+        >
+          Submit
+        </button>
+        <button mat-raised-button color="warn" (click)="onClear()">
+          Clear
+        </button>
+      </div>
+    </div>
+    <div fxFlex="40%" class="controlls-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Select Category*</mat-label>
+        <mat-select formControlName="CategoryID">
+          <mat-option>None</mat-option>
+          <ng-container *ngFor="let category of categories">
+            <mat-option [value]="category.CategoryID">{{
+              category.CategoryName
+            }}</mat-option>
+          </ng-container>
+          <mat-error *ngIf="qs.form.controls['CategoryID'].errors?.required"
+            >Please select a category</mat-error
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox style="width: 30%; margin: 5px" formControlName="Active"
+        >Active*</mat-checkbox
+      >
+      <mat-error *ngIf="qs.form.controls['Active'].errors?.required">{{
+        mandatoryMsg
+      }}</mat-error>
+
+      <mat-checkbox style="width: 30%; margin: 5px" formControlName="QnVolatile"
+        >Volatile Question</mat-checkbox
+      >
+      <mat-form-field style="width: 20%; padding-left: 25px">
+        <input
+          type="password"
+          formControlName="Answer"
+          matInput
+          placeholder="Answer*"
+        />
+        <mat-error *ngIf="qs.form.controls['Answer'].errors?.required">{{
+          mandatoryMsg
+        }}</mat-error>
+        <mat-error *ngIf="qs.form.controls['Answer'].errors?.min"
+          >Enter value between 1 and 5</mat-error
+        >
+        <mat-error *ngIf="qs.form.controls['Answer'].errors?.max"
+          >Enter value between 1 and 5</mat-error
+        >
+        <mat-error *ngIf="qs.form.controls['Answer'].errors?.maxlength"
+          >One digit number represents the correct answer</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field style="width: 20%; padding-left: 25px">
+        <input
+          formControlName="QnTime"
+          matInput
+          placeholder="Time in seconds*"
+        />
+        <mat-error>{{ mandatoryMsg }}</mat-error>
+        <mat-error>Min 5 seconds</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <textarea
+          style="height: 100px"
+          formControlName="AnswerDescription"
+          matInput
+          placeholder="Answer Description"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Upload Question Image</mat-label>
+        <ngx-mat-file-input
+          formControlName="ImageName"
+          placeholder="Upload Image"
+          (change)="uploadImage($event.target.files)"
+        >
+        </ngx-mat-file-input>
+        <mat-card *ngIf="imgSrc">
+          <mat-card-header>
+            <mat-progress-bar
+              mode="determinate"
+              [value]="progress"
+              [style.width.%]="progress"
+            ></mat-progress-bar>
+          </mat-card-header>
+          <img
+            mat-card-image
+            [src]="imgSrc"
+            style="height: 150px; width: 150px"
+          />
+        </mat-card>
+        <mat-icon matSuffix>file_upload</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

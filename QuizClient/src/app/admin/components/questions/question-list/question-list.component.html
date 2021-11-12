@@ -1,0 +1,73 @@
+<div class="search-div">
+  <button mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon>Create
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+  <mat-table #qnsTable [dataSource]="datasource" matSort>
+    <ng-container matColumnDef="QnID">
+      <mat-header-cell fxFlex="5" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+      <mat-cell fxFlex="5" *matCellDef="let ele">{{ ele.QnID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CategoryID">
+      <mat-header-cell fxFlex="12" *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+      <mat-cell fxFlex="12" *matCellDef="let ele">{{ ele.Category?.CategoryName }}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="Qn">
+      <mat-header-cell fxFlex="12" *matHeaderCellDef mat-sort-header>Question</mat-header-cell>
+      <mat-cell *matCellDef="let ele" fxFlex="12"><span class="ellipsis">{{ ele.Qn }}</span></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Option1">
+      <mat-header-cell fxFlex="12" *matHeaderCellDef>Option 1</mat-header-cell>
+      <mat-cell *matCellDef="let ele" fxFlex="12"><span class="ellipsis">{{ ele.Option1 }}</span></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Option2">
+      <mat-header-cell fxFlex="12" *matHeaderCellDef>Option 2</mat-header-cell>
+      <mat-cell *matCellDef="let ele" fxFlex="12"><span class="ellipsis">{{ ele.Option2 }}</span></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Option3">
+      <mat-header-cell fxFlex="12" *matHeaderCellDef>Option 3</mat-header-cell>
+      <mat-cell *matCellDef="let ele" fxFlex="12"><span class="ellipsis">{{ ele.Option3 }}</span></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Option4">
+      <mat-header-cell fxFlex="12" *matHeaderCellDef>Option 4</mat-header-cell>
+      <mat-cell *matCellDef="let ele" fxFlex="12"><span class="ellipsis">{{ ele.Option4 }}</span></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Option5">
+      <mat-header-cell fxFlex="12" *matHeaderCellDef>Option 5</mat-header-cell>
+      <mat-cell *matCellDef="let ele" fxFlex="12"><span class="ellipsis">{{ ele.Option5 }}</span></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="QnTime">
+      <mat-header-cell fxFlex="6"*matHeaderCellDef  mat-sort-header>Time</mat-header-cell>
+      <mat-cell fxFlex="6" *matCellDef="let ele">{{ ele.QnTime }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions" class="container-border">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="onEdit(row)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="onDelete(row.QnID)"><mat-icon>delete</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No Data...
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':datasource != null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(datasource != null && datasource.data.length == 0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 9, 25, 100]" [pageSize]="9" showFirstLastButtons></mat-paginator>
+</div>

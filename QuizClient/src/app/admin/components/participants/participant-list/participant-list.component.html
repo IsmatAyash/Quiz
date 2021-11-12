@@ -1,0 +1,70 @@
+<div class="search-div">
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="datasource" matSort>
+    <ng-container matColumnDef="ParticipantID">
+      <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+      <mat-cell fxFlex="10" *matCellDef="let ele">{{ ele.ParticipantID }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="FullName">
+      <mat-header-cell fxFlex="13" *matHeaderCellDef mat-sort-header>FullName</mat-header-cell>
+      <mat-cell fxFlex="13" *matCellDef="let ele">{{ ele.FullName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Email">
+      <mat-header-cell fxFlex="20" *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell fxFlex="20" *matCellDef="let ele">{{ ele.Email }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="UserRole">
+      <mat-header-cell fxFlex="10" *matHeaderCellDef>User Role</mat-header-cell>
+      <mat-cell fxFlex="10" *matCellDef="let ele">{{ ele.UserRole }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Q1Grade">
+      <mat-header-cell fxFlex="6" *matHeaderCellDef>Q1</mat-header-cell>
+      <mat-cell fxFlex="6" *matCellDef="let ele">{{ ele.Q1Grade | percent }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Q2Grade">
+      <mat-header-cell fxFlex="6" *matHeaderCellDef>Q2</mat-header-cell>
+      <mat-cell fxFlex="6" *matCellDef="let ele">{{ ele.Q2Grade | percent }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Q3Grade">
+      <mat-header-cell fxFlex="6" *matHeaderCellDef>Q3</mat-header-cell>
+      <mat-cell fxFlex="6" *matCellDef="let ele">{{ ele.Q3Grade | percent }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Q4Grade">
+      <mat-header-cell fxFlex="6" *matHeaderCellDef>Q4</mat-header-cell>
+      <mat-cell fxFlex="6" *matCellDef="let ele">{{ ele.Q4Grade | percent }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="LastResetDate">
+      <mat-header-cell fxFlex="6" *matHeaderCellDef>Last Reset</mat-header-cell>
+      <mat-cell fxFlex="6" *matCellDef="let ele">{{ ele.LastResetDate | date }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions" class="container-border">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" (click)="onEdit(row)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="onDelete(row.ParticipantID)"><mat-icon>delete</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No Data...
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':datasource != null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(datasource != null && datasource.data.length == 0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 9, 25, 100]" [pageSize]="9" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,375 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap";
+
+$primary-color: #009688;
+$accent-color: #ff9800;
+$warn-color: #d50000;
+$primary-color-hover: #b1c522;
+$dark-background: #616161;
+$darker-background: #424242;
+$light-background: #bdbdbd;
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  border: solid 1px lightgray;
+  min-height: 245px;
+}
+
+.box mat-icon {
+  font-size: x-large;
+}
+
+.question-title {
+  font-size: 14pt;
+  font-weight: bold;
+  color: white;
+  padding-top: 5px;
+}
+
+.quiz-img-frame {
+  padding-top: 5px;
+  width: 400px;
+  height: 285px;
+}
+
+.options-area {
+  background: whitesmoke;
+  min-height: 260px;
+}
+
+.options-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.options-radio-button {
+  margin-bottom: 5px;
+  margin-left: 5px;
+  white-space: normal !important;
+}
+
+.options-radio-button > * {
+  margin-bottom: 5px;
+  white-space: normal !important;
+}
+
+// quiz results styling
+.image-size {
+  width: 210px;
+  height: 190px;
+  background-size: cover;
+}
+
+.main-img-size {
+  width:170px;
+  height:100px;
+  margin:auto;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.box-size {
+  width: 220px;
+  height: 200px;
+  font-size: x-large;
+  color: white;
+  background-color: $darker-background;
+}
+
+.in-correct-text{
+  color: white;
+  font-weight: bold;
+  padding-top: 2px;
+  font-size: 20px;
+}
+
+/* mat-confirm-dialog (customised dialog) */
+.confirm-dialog-container .mat-dialog-container {
+  border-radius: .25em .25em .4em .4em;
+  padding: 0px;
+}
+
+.confirm-dialog-container .content-container{
+  margin: 5px 5px 15px 5px;
+  color: $dark-background;
+  display: flex;
+}
+
+.confirm-dialog-container #close-icon{
+  margin-right: auto;
+  order: 2;
+  font-weight: bolder;
+}
+
+.confirm-dialog-container #close-icon:hover{
+  cursor: pointer;
+}
+
+.confirm-dialog-container #no-button{
+  height: 50px;
+  width: 50%;
+  background-color: $accent-color;
+  color:black;
+  border-radius: 0px;
+}
+
+.confirm-dialog-container #yes-button{
+  height: 50px;
+  width: 50%;
+  background-color: $primary-color;
+  color:white;
+  border-radius: 0px;
+}
+
+.confirm-dialog-container span.content-span{
+  padding:  35px 16px;
+  text-align: left;
+  font-size: 20px;
+}
+
+/* notification */
+snack-bar-container.success {
+  background-color: $dark-background;
+}
+
+snack-bar-container.warn,
+snack-bar-container.info {
+  background-color: $accent-color;
+}
+
+snack-bar-container.error {
+  background-color: $warn-color;
+}
+
+/* defined inside the snackbar-service in paneClass */
+.snackbar-notification{
+  font-size: small;
+  font-weight: bold;
+  max-width: 90% !important;
+  width: 600px;
+  color: white;
+}
+
+/* question and master details form styles */
+.container-master-details {
+  margin: 0px 0px;
+  background-color: white;
+}
+
+.upload {
+  font-weight: bold;
+  columns: $warn-color;
+  margin-left: 15px;
+  line-height: 36px;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.btn-dialog-close {
+  width: 40px;
+  min-width: 0px !important;
+  height: 45px;
+  padding: 0px !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.normal-form {
+  margin: 5px;
+}
+
+.controlls-container {
+  width: 100%;
+  padding: 1%;
+}
+
+.controlls-container > * {
+  width: 100%;
+  font-size: small;
+}
+
+.qn-textarea{
+  height: 75px;
+}
+
+.button-row button{
+  margin: 5px;
+}
+
+.mat-error {
+  font-size: x-small;
+}
+
+mat-label{
+  font-size: medium;
+}
+
+// participant radio button for the user role
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+
+/* mat Table styling */
+.hide{
+  display: none;
+}
+
+.mat-table,
+.mat-paginator {
+  margin: 5px;
+  width: 99%;
+}
+
+.mat-paginator {
+  .mat-paginator-container {
+    justify-content: left;
+  }
+}
+
+.mat-row:nth-child(even){
+  background-color:white;
+}
+
+.mat-row:nth-child(odd){
+  background-color:lightgrey;
+}
+
+mat-header-row {
+  min-height: 20px !important;
+}
+
+mat-header-cell {
+  flex-direction: column;
+  border: 0.5px solid darkgrey;
+}
+
+mat-row {
+  min-height: 20px !important;
+}
+
+.mat-icon{
+  font-size: large;
+}
+
+.mat-column-UserRole, .mat-column-Q1Grade, .mat-column-Q2Grade,
+.mat-column-Q3Grade, .mat-column-Q4Grade, .mat-column-Qn, .mat-column-Option1,
+.mat-column-Option2, .mat-column-Option3, .mat-column-Option4, .mat-column-Option5,
+.mat-column-QnTime, .mat-column-actions, .mat-column-date, .mat-column-score,
+.mat-column-timespent, .mat-column-status, .mat-column-qtr,
+.mat-column-qtr1, .mat-column-qtr2, .mat-column-qtr3, .mat-column-qtr4 {
+  justify-content: center;
+}
+
+mat-footer-row mat-footer-cell {
+  justify-content: center;
+  font-style: italic;
+}
+
+mat-cell > span.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.search-div{
+  margin: 10px;
+  }
+  .search-form-field{
+    width: 60%;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  .search-form-field div.mat-from-field-underline {
+    display: none;
+  }
+  .search-form-field div.mat-from-field-infix {
+    border-top: 0px;
+  }
+  .search-form-field div.mat-from-field-wrapper {
+    padding-bottom: 0px;
+  }
+  .search-form-field div.mat-from-field-suffix button {
+    height: 25px;
+    width: 32px;
+  }
+
+
+  /* login and app setting styling */
+  .login-wrapper{
+    height:100%;
+  }
+
+  .form-box{
+    padding: 10px 1px 10px 10px;
+    width:100%;
+    background:#fff;
+    border-radius:10px;
+    max-width:330px;
+  }
+
+  .field-form {
+    margin-bottom: 20px;
+    min-width: 150px;
+    max-width: 500px;
+    width: 95%;
+  }
+
+  .login-wrapper mat-card-header{
+    text-align:center;
+    width:100%;
+    display:block;
+    font-weight:700;
+  }
+
+  .login-wrapper mat-card-header mat-card-title{
+    font-size:30px;
+  }
+
+  .login-wrapper .btn-block{
+    float: right;
+    margin-right: 5px;
+  }
+
+// progress timer styles
+  .timer{
+    font-size: 15pt;
+    background-color: $darker-background;
+    color: white;
+  }
+
+  .progressbar-h4 {
+    padding-top: 13px;
+    padding-right: 10px;
+    color: white;
+  }
+
+  .progressbar-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $darker-background;
+  }
+
+  .progressbar-margin {
+    margin: 0px 5px;
+    height: 10px;
+  }

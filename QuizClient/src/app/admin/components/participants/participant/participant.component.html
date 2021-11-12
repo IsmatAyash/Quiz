@@ -1,0 +1,51 @@
+<mat-toolbar>
+  <span>{{ "Modify User: " + ps.form.controls['ParticipantID'].value }}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-strocked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="ps.form" class="normal-form" (ngSubmit)="onSubmit()">
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+      <div fxFlex="60%" class="controlls-container">
+        <input type="hidden" formControlName="ParticipantID">
+        <mat-form-field>
+          <input type="text" formControlName="FullName" matInput placeholder="FullName">
+          <mat-error>{{ mandatoryMsg }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="email" formControlName="Email" matInput placeholder="Email">
+          <mat-error>{{ mandatoryMsg }}</mat-error>
+        </mat-form-field>
+
+        <div>
+          <label id="userRole-radio-group-label">User Role </label>
+          <mat-radio-group class="example-radio-group" formControlName="UserRole" aria-labelledby="userRole-radio-group-label">
+            <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role">{{ role }}</mat-radio-button>
+          </mat-radio-group>
+          <mat-form-field>
+            <mat-label>Last Reset Date</mat-label>
+            <input readonly value = "{{ ps.form.value.LastResetDate | date }}" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex="40%" class="controlls-container">
+        <mat-form-field>
+          <input readonly value="{{ ps.form.value.Q1Grade | percent }}" matInput placeholder="Q1 Grade">
+        </mat-form-field>
+        <mat-form-field>
+          <input readonly value="{{ ps.form.value.Q2Grade | percent }}" matInput placeholder="Q2 Grade">
+        </mat-form-field>
+        <mat-form-field>
+          <input readonly value="{{ ps.form.value.Q3Grade | percent }}" matInput placeholder="Q3 Grade">
+        </mat-form-field>
+        <mat-form-field>
+          <input readonly value="{{ ps.form.value.Q4Grade | percent }}" matInput placeholder="Q4 Grade">
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" [disabled]="ps.form.invalid" type="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+</form>
+

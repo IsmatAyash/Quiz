@@ -1,0 +1,23 @@
+<mat-toolbar>
+  <span>{{ cs.form.controls['CategoryID'].value ? "Modify Category # " + cs.form.controls['CategoryID'].value : "New Category" }}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-strocked-button (click)="onClose(null)" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="cs.form" class="normal-form" (ngSubmit)="onSubmit()">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayout.sm="column" fxFlex="100%">
+      <div fxLayout="row" class="controlls-container">
+        <input type="hidden" formControlName="CategoryID">
+        <mat-form-field style="width: 100%">
+          <input type="text" style="width: 100%" formControlName="CategoryName" matInput placeholder="CategoryName*">
+          <mat-error *ngIf="cs.form.controls['CategoryName'].errors?.required">{{ mandatoryMsg }}</mat-error>
+        </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" class="button-row">
+          <button mat-raised-button color="primary" [disabled]="cs.form.invalid" type="submit">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+    </div>
+</form>
+

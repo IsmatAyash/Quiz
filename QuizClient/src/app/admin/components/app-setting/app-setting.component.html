@@ -1,0 +1,67 @@
+<div class="login-wrapper" fxLayout="column" fxLayoutAlign="center center">
+  <div class="form-box" fxLayout="column">
+    <mat-toolbar fxLayout="row">
+        <mat-icon fxFlex="15%">settings</mat-icon>
+        <span class="mat-h2" fxFlex="70%">Application setting</span>
+        <span class="fill-remaining-space"></span>
+        <button fxFlex="15%" class="btn-dialog-close" mat-strocked-button (click)="onClose()" tabIndex="-1">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-toolbar>
+      <br>
+    <div>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <input type="hidden" id="Id" name="Id" ngModel="1">
+        <mat-form-field class="field-form">
+          <mat-label>Number of Questions</mat-label>
+          <mat-icon matPrefix>live_help</mat-icon>
+          <span matPrefix>  &nbsp;</span>
+          <input
+            matInput name="NumberOfQuestions"
+            id="NumberOfQuestions"
+            [(ngModel)]="noOfQns" required>
+          <mat-hint>Define the number of questions per quiz</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="field-form">
+          <mat-label>Days Between Quizes</mat-label>
+          <mat-icon matPrefix>today</mat-icon>
+          <span matPrefix>  &nbsp;</span>
+          <input
+            matInput type="text"
+            name="DaysBetweenQuizes"
+            id="DaysBetweenQuizes"
+            [(ngModel)]="daysBetQzs" required>
+          <mat-hint>Define the number of days allowed between quizes</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="field-form">
+          <mat-label>Default User Role</mat-label>
+          <mat-icon matPrefix>supervisor_account</mat-icon>
+          <span matPrefix>  &nbsp;</span>
+          <input
+            matInput type="text"
+            name="DefaultUserRole"
+            id="DefaultUserRole"
+            [(ngModel)]="defaultUsrRole" required>
+          <mat-hint>Define the default role assigned for new users</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="field-form">
+          <mat-label>User Roles</mat-label>
+          <mat-icon matPrefix>toc</mat-icon>
+          <span matPrefix>  &nbsp;</span>
+          <input
+            matInput type="text"
+            name="UserRoles"
+            id="UserRoles"
+            [(ngModel)]="userRoles" required>
+          <mat-hint>Define the default roles seperated by comma</mat-hint>
+        </mat-form-field>
+
+        <button mat-flat-button type="submit" color="primary" [disabled]="f.invalid" class="btn-block">Save</button>
+        <button mat-flat-button type="button" color="warn" (click)="resetQn()">Reset Questions</button>
+      </form>
+    </div>
+  </div>
+</div>
